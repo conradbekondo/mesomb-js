@@ -1,0 +1,24 @@
+{
+    "name": "mesomb-client",
+    "$schema": "../../node_modules/nx/schemas/project-scehma.json",
+    "sourceRoot": "libs/mesomb-client/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "options": {
+                "outputPath": "dist/libs/mesomb-client",
+                "main": "libs/mesomb-client/src/index.ts",
+                "tsConfig": "libs/mesomb-client/tsconfig.json",
+                "assets": []
+            }
+        }
+    },
+    "tags": [
+        "mobile",
+        "mesomb"
+    ]
+}
