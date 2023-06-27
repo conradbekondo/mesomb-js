@@ -137,13 +137,13 @@ export class PaymentOperation {
             conversion,
         };
         if (location) {
-            body.location = location;
+            body['location'] = location;
         }
         if (customer) {
-            body.customer = customer;
+            body['customer'] = customer;
         }
         if (product) {
-            body.product = product;
+            body['product'] = product;
         }
         if (extra) {
             body = Object.assign(body, extra);
@@ -275,7 +275,7 @@ export class PaymentOperation {
         const body: Record<string, any> = {field, action};
 
         if (action !== 'UNSET') {
-            body.value = value;
+            body['value'] = value;
         }
 
         const authorization = this._getAuthorization(
@@ -360,8 +360,8 @@ export class PaymentOperation {
         return await response.json();
     }
 
-    public async checkTransactionStatus(...ids: string[]) {
-        const endpoint = `payment/transactions/check/?ids=${ids.join(',')}&source=EXTERNAL`;
+    public async checkTransactionStatus(isExternal: boolean, ...ids: string[]) {
+        const endpoint = `payment/transactions/check/?ids=${ids.join(',')}&source=${isExternal ? 'EXTERNAL' : 'MESOMB'}`;
         const url = this._buildUrl(endpoint);
         const nonce = Signature.nonceGenerator();
         const date = new Date();
